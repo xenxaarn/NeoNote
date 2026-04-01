@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/58b2be18-5323-4738-a593-0c9b3584233a" width="300" alt="NeoNote Logo">
-  
+  <img src="https://github.com/user-attachments/assets/20041a3f-baa3-4905-8100-45b6a659aedb" width="300" alt="NeoNote Logo">
+
   <h1>NeoNote</h1>
 
   <p>
