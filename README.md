@@ -1,4 +1,4 @@
-# NeoNote <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f61e956c-fe57-4a8d-af23-145b3740e809" />
+# NeoNote
 
 A note taking app that is fully encrypted 
 
