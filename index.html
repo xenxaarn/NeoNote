@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoNote | Secure Open Source</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="lock-screen" class="overlay hidden">
+        <div class="neo-card glow-card">
+            <h3>🔒 NeoNote Access</h3>
+            <p id="lock-status">App is fully offline and secure.</p>
+            <input type="password" id="unlock-pass" placeholder="Enter Access Code">
+            <button id="unlock-btn" class="glow-button">Unlock Note Vault</button>
+            <p id="forgot-phrase" class="link-text">Reset with Secret Phrase</p>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar neo-card">
+            <div class="sidebar-header">
+                <h1 class="logo-text">Neo<span class="logo-accent">Note</span></h1>
+                <input type="text" id="search-bar" placeholder="Search decrypted notes...">
+            </div>
+            
+            <ul id="notes-list">
+                <li class="note-item selected">
+                    <span class="note-icon">📝</span> Welcome to NeoNote
+                </li>
+                <li class="note-item locked-item">
+                    <span class="note-icon">🔒</span> Protected Secret
+                </li>
+            </ul>
+
+            <div class="footer-controls">
+                <select id="theme-menu" class="minimal-select">
+                    <option value="dark">Dark Mode (Glow)</option>
+                    <option value="hacker">Green (Hacker Mode)</option>
+                    <option value="purple">Light Purple Mode</option>
+                    <option value="light">Light Mode</option>
+                </select>
+                <div class="status-tag">FULLY OFFLINE</div>
+            </div>
+        </aside>
+
+        <main class="editor neo-card">
+            <div class="editor-header">
+                <div class="metadata">Last Edit: Today, 3:15 PM</div>
+                <div class="editor-tools">
+                    <button id="lock-note-btn" class="tool-btn">🔒</button>
+                    <button id="encrypt-img-btn" class="tool-btn">🖼️ Hide Message</button>
+                    <button id="save-btn" class="glow-button">Save</button>
+                    <button id="delete-btn" class="danger-btn">Delete</button>
+                </div>
+            </div>
+            
+            <input type="text" id="note-title" placeholder="Untitled Note..." autocomplete="off">
+            <textarea id="note-content" placeholder="Start typing your thoughts... everything here is encrypted on save."></textarea>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+/* --- UNIVERSAL VARIABLES & DEFAULTS --- */
+:root {
+    --transition-speed: 0.3s;
+    --font-main: 'Poppins', sans-serif;
+    --font-code: 'Fira Code', monospace; /* Used for title & hacker mode */
+
+    /* Universal Radius for 'Fully Fully Rounded' */
+    --radius-full: 50px; /* Applies to main cards and buttons */
+    --radius-small: 20px; /* Applies to inputs/list items inside cards */
+
+    /* Default 'Dark Mode Glow' Variables */
+    --bg-color: #090a0c;
+    --sidebar-color: rgba(20, 22, 26, 0.8); /* Translucent sidebar */
+    --text-color: #e0e6ed;
+    --text-muted: #8899a6;
+    
+    /* The Core Glow Accent */
+    --accent-color: #00bcd4; /* Cyan/Teal base */
+    --accent-glow: 0 0 20px rgba(0, 188, 212, 0.6);
+    --accent-hover: #1de9b6;
+
+    /* Base Shadow Definition */
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --card-border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- THEME DEFINITIONS --- */
+
+/* Green Mode (Hacker) - The main request */
+[data-theme="hacker"] {
+    --bg-color: #010400;
+    --sidebar-color: rgba(0, 15, 0, 0.9);
+    --text-color: #00ff00; /* Bright terminal green */
+    --text-muted: #00aa00;
+    --accent-color: #33ff33; /* Pure lime green */
+    --accent-glow: 0 0 25px rgba(51, 255, 51, 0.7); /* Powerful green glow */
+    --accent-hover: #ccffcc;
+    --font-main: var(--font-code); /* Make all text look like code */
+    --card-border: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+/* Light Purple Mode (Translucent) */
+[data-theme="purple"] {
+    --bg-color: #f7f2f9;
+    --sidebar-color: rgba(235, 220, 240, 0.9);
+    --text-color: #311b92;
+    --text-muted: #673ab7;
+    --accent-color: #9c27b0; /* Rich Purple */
+    --accent-glow: 0 0 15px rgba(156, 39, 176, 0.4);
+    --card-border: 1px solid rgba(156, 39, 176, 0.1);
+}
+
+/* --- BASIC RESET & LAYOUT --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none; /* Let's manage focus state customly for glow */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: background-color var(--transition-speed);
+}
+
+.app-container {
+    display: flex;
+    width: 96vw;
+    height: 94vh;
+    gap: 20px; /* Space between sidebar and editor */
+}
+
+/* --- REUSABLE NEO-CARD DESIGN --- */
+.neo-card {
+    border-radius: var(--radius-full);
+    border: var(--card-border);
+    box-shadow: var(--box-shadow);
+    transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+/* Glow on hover/active cards (optional subtly) */
+.neo-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 5px rgba(255, 255, 255, 0.03);
+}
+
+/* --- SIDEBAR (FULLY ROUNDED CONTAINER) --- */
+.sidebar {
+    width: 320px;
+    background: var(--sidebar-color);
+    padding: 40px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text {
+    font-family: var(--font-code);
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.logo-accent {
+    color: var(--accent-color);
+    text-shadow: var(--accent-glow);
+}
+
+#search-bar {
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    border-radius: var(--radius-small);
+    border: var(--card-border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-color);
+    transition: all var(--transition-speed);
+}
+
+/* Input Glow on Focus */
+#search-bar:focus {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Notes List */
+#notes-list {
+    list-style: none;
+    flex-grow: 1;
+    overflow-y: auto; /* Scrollable notes list */
+    margin-right: -10px; /* Hide scrollbar visually */
+}
+
+.note-item {
+    padding: 15px 20px;
+    margin-bottom: 8px;
+    border-radius: var(--radius-small);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.note-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Highlighted/Selected Note (Has Glow!) */
+.note-item.selected {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    color: var(--accent-color);
+    text-shadow: var(--accent-glow);
+}
+
+.note-icon {
+    margin-right: 10px;
+    opacity: 0.7;
+}
+
+/* Footer Section */
+.footer-controls {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.minimal-select {
+    padding: 8px 15px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.status-tag {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* --- MAIN EDITOR (FULLY ROUNDED CONTAINER) --- */
+.editor {
+    flex-grow: 1;
+    background: var(--bg-color); /* Kept solid for best writing contrast */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.metadata {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.editor-tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- BUTTON & INPUT GLOW STYLES --- */
+
+/* Basic Tool Buttons (Subtle hover) */
+.tool-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-small);
+    padding: 10px 15px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Main Glowing Action Button */
+.glow-button {
+    background-color: var(--accent-color);
+    color: #000; /* Contrast against bright cyan/green */
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 12px 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), var(--accent-glow);
+}
+
+.glow-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+.glow-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), var(--accent-glow);
+}
+
+/* Danger Button (Subtle Red Glow) */
+.danger-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 75, 75, 0.4);
+    color: #ff4b4b;
+    border-radius: var(--radius-full);
+    padding: 12px 25px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.danger-btn:hover {
+    background: rgba(255, 75, 75, 0.1);
+    box-shadow: 0 0 15px rgba(255, 75, 75, 0.3);
+}
+
+/* Text Fields */
+#note-title {
+    font-family: var(--font-code); /* Code font for titles in dark/hacker */
+    font-size: 2.5rem;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    padding: 5px 0;
+}
+
+#note-title::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+#note-content {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    resize: none; /* No manual resize */
+    opacity: 0.9;
+}
+
+/* --- LOCK SCREEN OVERLAY (THE VAULT ENTRY) --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px); /* Heavy blur for locked state */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay.hidden { display: none; }
+
+.lock-box {
+    text-align: center;
+    padding: 60px 50px;
+    width: 400px;
+}
+
+.lock-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.lock-box p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+#unlock-pass {
+    width: 100%;
+    padding: 15px;
+    border-radius: var(--radius-full);
+    border: var(--card-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    text-align: center;
+    letter-spacing: 5px; /* Spaces out password dots */
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.link-text {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
+    opacity: 0.8;
+}
+
+.link-text:hover { opacity: 1; }
