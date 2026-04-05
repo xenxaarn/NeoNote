@@ -17,8 +17,17 @@ const save_btn = document.getElementById("save-btn"); // grabbing the save btn
 let storage = []; // storing our notes here (different from the arr array which is used for logging every key stroke made by the user)
 
 save_btn.addEventListener("click", () => {
-    if (content.value !== "") {
+    if (content.value !== "") { // only save if the content text isnt empty
         storage.push(content.value)
-        console.log(storage)
+        console.log(storage) // testing purposes
+
+        const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
+
+        for (let i = 0; i < storage.length; i++) {
+            const li = document.createElement("li"); // create the element to append to the unordered list (this is to test my solution)
+            li.className = "note-item"; // setting the className to this as the css will pick it up and apply the styles needed
+            notes_list.appendChild(li)
+            console.log("code reached") // test case
+        }
     }
 });
