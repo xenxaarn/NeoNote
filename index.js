@@ -24,8 +24,13 @@ save_btn.addEventListener("click", () => {
         const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
 
         for (let i = 0; i < storage.length; i++) {
+            // inner spam elements to hold the <li> elements title (note title)
+            const inner_sp = document.createElement("span")
+            inner_sp.innerText = "test";
+
             const li = document.createElement("li"); // create the element to append to the unordered list (this is to test my solution)
             li.className = "note-item"; // setting the className to this as the css will pick it up and apply the styles needed
+            li.appendChild(inner_sp)
             notes_list.appendChild(li)
             console.log("code reached") // test case
         }
