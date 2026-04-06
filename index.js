@@ -15,10 +15,16 @@ const save_btn = document.getElementById("save-btn"); // grabbing the save btn
 
 // grabbing the title to then save and act as the unordered lists title:
 const ul_title = document.getElementById("note-title")
+const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
+
 
 let storage = []; // storing our notes here (different from the arr array which is used for logging every key stroke made by the user)
 
 let same; // small logic ill add to make sure the same title doesnt exist when the user makes a new note
+
+let title;
+let content2;
+
 
 save_btn.addEventListener("click", () => {
     if (ul_title.value !== same) {
@@ -26,19 +32,29 @@ save_btn.addEventListener("click", () => {
             storage.push(content.value)
             console.log(storage) // testing purposes
 
-            const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
-
             same = ul_title.value;
             // inner spam elements to hold the <li> elements title (note title)
             const inner_sp = document.createElement("span")
             inner_sp.innerText = ul_title.value;
 
+            title = ul_title.value;
+            content2 = content.value;
+
             const li = document.createElement("li"); // create the element to append to the unordered list (this is to test my solution)
             li.classList.add("note-item") // setting the className to this as the css will pick it up and apply the styles needed
-            li.id = same
+            const unique_id = "abc-" + Date.now();
+            inner_sp.id = unique_id
+            li.id = unique_id
             li.appendChild(inner_sp)
             notes_list.appendChild(li)
             console.log("code reached") // test case
+
+            li.addEventListener("click", () => {
+                console.log("new code reached") // test case
+
+                ul_title.value = title;
+                content.value = content2;
+            })
 
         }
     }
