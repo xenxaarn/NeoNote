@@ -21,11 +21,11 @@ let storage = []; // storing our notes here (different from the arr array which 
 let same; // small logic ill add to make sure the same title doesnt exist when the user makes a new note
 
 save_btn.addEventListener("click", () => {
-    while (ul_title.value !== same) {
+    if (ul_title.value !== same) {
         if (content.value !== "") { // only save if the content text isnt empty
             storage.push(content.value)
             console.log(storage) // testing purposes
-        
+
             const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
 
             same = ul_title.value;
@@ -34,11 +34,17 @@ save_btn.addEventListener("click", () => {
             inner_sp.innerText = ul_title.value;
 
             const li = document.createElement("li"); // create the element to append to the unordered list (this is to test my solution)
-            li.className = "note-item"; // setting the className to this as the css will pick it up and apply the styles needed
+            li.classList.add("note-item") // setting the className to this as the css will pick it up and apply the styles needed
+            li.id = same
             li.appendChild(inner_sp)
             notes_list.appendChild(li)
             console.log("code reached") // test case
 
         }
+    }
+
+    // checking if values are nil
+    if (content.value == "" || ul_title.value == "") {
+        window.alert("content/title cant be empty.")
     }
 });
