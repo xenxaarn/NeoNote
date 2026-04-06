@@ -31,7 +31,7 @@ save_btn.addEventListener("click", () => {
         if (content.value !== "") { // only save if the content text isnt empty
             storage.push(content.value)
             console.log(storage) // testing purposes
-
+2
             same = ul_title.value;
             // inner spam elements to hold the <li> elements title (note title)
             const inner_sp = document.createElement("span")
@@ -49,11 +49,14 @@ save_btn.addEventListener("click", () => {
             notes_list.appendChild(li)
             console.log("code reached") // test case
 
+            const note_title = ul_title.value;
+            const note_content = content.value;
+
             li.addEventListener("click", () => {
                 console.log("new code reached") // test case
-
-                ul_title.value = title;
-                content.value = content2;
+                window.alert("switched to note", note_title)
+                ul_title.value = note_title;
+                content.value = note_content;
             })
 
         }
