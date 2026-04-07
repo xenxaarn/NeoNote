@@ -56,14 +56,8 @@ save_btn.addEventListener("click", () => {
             notes_list.appendChild(li)
             console.log("code reached") // test case
 
-            const delete_btn = document.getElementById("delete-btn")
-            // delete btn logic
-            delete_btn.addEventListener("click", () => {
-                console.log("delete code reached") // testing again
-                li.removeChild(inner_sp)
-                notes_list.removeChild(li)
-            });
-
+            // for referencing the current note
+            let current = null;
 
             const note_title = ul_title.value;
             const note_content = content.value;
@@ -73,7 +67,24 @@ save_btn.addEventListener("click", () => {
                 window.alert("switched to note", note_title)
                 ul_title.value = note_title;
                 content.value = note_content;
+
+                current = li;
             });
+
+
+            const delete_btn = document.getElementById("delete-btn")
+            // delete btn logic
+            delete_btn.addEventListener("click", () => {
+                console.log("delete code reached") // testing again
+                if (current) {
+                    notes_list.removeChild(current)
+                    current = null; // make it back to null after removing from note_list
+                    ul_title.value = "";
+                    content.value = "";
+                    window.alert("deletd note")
+                }
+            });
+
 
         }
     }
