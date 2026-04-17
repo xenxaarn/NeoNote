@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/xenxaarn/NeoNote/commit/035504bb39704a4db4d6c62d515d819734ef969f" width="300" alt="NeoNote Logo">
+  <img src="1.png" width="300" alt="NeoNote Logo">
 
   <h1>NeoNote</h1>
 
