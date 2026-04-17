@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="1.png" width="300" alt="NeoNote Logo">
+  <img src="NeoNote.png" width="300" alt="NeoNote Logo">
 
   <h1>NeoNote</h1>
 
