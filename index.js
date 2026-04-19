@@ -63,7 +63,6 @@ save_btn.addEventListener("click", () => {
 
             li.addEventListener("click", () => {
                 console.log("new code reached") // test case
-                globalThis.alert("switched to note", note_title)
                 ul_title.value = note_title;
                 content.value = note_content;
 
@@ -80,7 +79,6 @@ save_btn.addEventListener("click", () => {
                     current = null; // make it back to null after removing from note_list
                     ul_title.value = "";
                     content.value = "";
-                    globalThis.alert("deleted note")
                 }
             });
 
