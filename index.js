@@ -38,7 +38,6 @@ save_btn.addEventListener("click", () => {
         if (content.value !== "") { // only save if the content text isn't empty
             storage.push(content.value)
             console.log(storage) // testing purposes
-            2
             same = ul_title.value;
             // inner spam elements to hold the <li> elements title (note title)
             const inner_sp = document.createElement("span")
@@ -64,7 +63,7 @@ save_btn.addEventListener("click", () => {
 
             li.addEventListener("click", () => {
                 console.log("new code reached") // test case
-                window.alert("switched to note", note_title)
+                globalThis.alert("switched to note", note_title)
                 ul_title.value = note_title;
                 content.value = note_content;
 
@@ -77,11 +76,11 @@ save_btn.addEventListener("click", () => {
             delete_btn.addEventListener("click", () => {
                 console.log("delete code reached") // testing again
                 if (current) {
-                    notes_list.removeChild(current)
+                    current.remove()
                     current = null; // make it back to null after removing from note_list
                     ul_title.value = "";
                     content.value = "";
-                    window.alert("deleted note")
+                    globalThis.alert("deleted note")
                 }
             });
 
@@ -91,7 +90,7 @@ save_btn.addEventListener("click", () => {
 
     // checking if values are nil
     if (content.value == "" || ul_title.value == "") {
-        window.alert("content/title cant be empty.")
+        globalThis.alert("content/title cant be empty.")
     }
 });
 
