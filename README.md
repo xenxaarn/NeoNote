@@ -16,7 +16,7 @@
 
 ---
 
-## 📱 Preview
+## Preview
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b9aee94b-3baa-4f6b-b4e5-03efe5e91f1a" width="400" alt="NeoNote Screenshot">
@@ -24,14 +24,14 @@
 
 ---
 
-## ✨ Features
+## Features
 
 * 🔐 **Secure by Default**: Full encryption ensures your data remains private.
 * 🚀 **Modern UI**: Clean, distraction-free interface for focused writing.
 * ⚡ **Fast Performance**: Optimized for speed and low resource usage.
 * 📂 **Organized**: Easily manage and categorize your notes.
 
-## 🛠️ Installation
+## Installation
 
 1. **Clone the repository:**
    ```bash

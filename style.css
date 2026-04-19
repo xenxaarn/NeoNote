@@ -2,7 +2,7 @@
 :root {
     --transition-speed: 0.3s;
     --font-main: 'Poppins', sans-serif;
-    --font-code: 'Fira Code', monospace; /* Used for title & hacker mode */
+    --font-code: 'Fira Code', monospace; /* Used for title */
 
     /* Universal Radius for 'Fully Fully Rounded' */
     --radius-full: 50px; /* Applies to main cards and buttons */
@@ -14,40 +14,14 @@
     --text-color: #e0e6ed;
     --text-muted: #8899a6;
     
-    /* The Core Glow Accent */
-    --accent-color: #00bcd4; /* Cyan/Teal base */
-    --accent-glow: 0 0 20px rgba(0, 188, 212, 0.6);
-    --accent-hover: #1de9b6;
+    /* The Core Glow Accent of buttons from 1 to 3*/ 
+    --accent-color:  rgb(85, 85, 218); /*Purple*/
+    /* --accent-glow: 0 0 20px rgba(0, 188, 212, 0.6); */
+    --accent-hover:#00bcd4;
 
     /* Base Shadow Definition */
     --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     --card-border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* --- THEME DEFINITIONS --- */
-
-/* Green Mode (Hacker) - The main request */
-[data-theme="hacker"] {
-    --bg-color: #010400;
-    --sidebar-color: rgba(0, 15, 0, 0.9);
-    --text-color: #00ff00; /* Bright terminal green */
-    --text-muted: #00aa00;
-    --accent-color: #33ff33; /* Pure lime green */
-    --accent-glow: 0 0 25px rgba(51, 255, 51, 0.7); /* Powerful green glow */
-    --accent-hover: #ccffcc;
-    --font-main: var(--font-code); /* Make all text look like code */
-    --card-border: 1px solid rgba(0, 255, 0, 0.1);
-}
-
-/* Light Purple Mode (Translucent) */
-[data-theme="purple"] {
-    --bg-color: #f7f2f9;
-    --sidebar-color: rgba(235, 220, 240, 0.9);
-    --text-color: #311b92;
-    --text-muted: #673ab7;
-    --accent-color: #9c27b0; /* Rich Purple */
-    --accent-glow: 0 0 15px rgba(156, 39, 176, 0.4);
-    --card-border: 1px solid rgba(156, 39, 176, 0.1);
 }
 
 /* --- BASIC RESET & LAYOUT --- */
@@ -55,7 +29,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    outline: none; /* Let's manage focus state customly for glow */
+    outline: none; /**/
 }
 
 body {
@@ -109,7 +83,7 @@ body {
 }
 
 .logo-accent {
-    color: var(--accent-color);
+    color: white;
     text-shadow: var(--accent-glow);
 }
 
@@ -278,7 +252,7 @@ body {
 
 /* Text Fields */
 #note-title {
-    font-family: var(--font-code); /* Code font for titles in dark/hacker */
+    font-family: var(--font-code); /* Code font for titles in dark */
     font-size: 2.5rem;
     font-weight: 600;
     border: none;

@@ -18,7 +18,7 @@ const ul_title = document.getElementById("note-title")
 const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
 
 
-document.getElementById("encrypt-img-btn").addEventListener("click", () => {
+document.getElementById("Clear-btn").addEventListener("click", () => {
     ul_title.value = "";
     content.value = "";
     console.log("note cleared") // test
@@ -27,7 +27,7 @@ document.getElementById("encrypt-img-btn").addEventListener("click", () => {
 
 let storage = []; // storing our notes here (different from the arr array which is used for logging every key stroke made by the user)
 
-let same; // small logic ill add to make sure the same title doesnt exist when the user makes a new note
+let same; // small logic ill add to make sure the same title doesn't exist when the user makes a new note
 
 let title;
 let content2;
@@ -35,7 +35,7 @@ let content2;
 
 save_btn.addEventListener("click", () => {
     if (ul_title.value !== same) {
-        if (content.value !== "") { // only save if the content text isnt empty
+        if (content.value !== "") { // only save if the content text isn't empty
             storage.push(content.value)
             console.log(storage) // testing purposes
             2
@@ -81,7 +81,7 @@ save_btn.addEventListener("click", () => {
                     current = null; // make it back to null after removing from note_list
                     ul_title.value = "";
                     content.value = "";
-                    window.alert("deletd note")
+                    window.alert("deleted note")
                 }
             });
 
