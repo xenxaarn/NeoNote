@@ -1,95 +1,126 @@
-const content = document.getElementById("note-content")
+// grabbing elements
+const content = document.getElementById("note-content");
+const save_btn = document.getElementById("save-btn");
+const ul_title = document.getElementById("note-title");
+const notes_list = document.getElementById("notes-list");
+const delete_btn = document.getElementById("delete-btn");
+const lock_btn = document.getElementById("lock-note-btn");
+const clear_btn = document.getElementById("Clear-btn");
 
-// ^^ grabbing our necessary elements
+// storage
+let storage = [];
+let current = null;
+let same = null;
 
-let arr = []; // this is where ill store notes (for test cases)
-
-content.addEventListener("input", () => {
-    if (content.value !== "") {
-        arr.push(content.value);
-    }
-})
-
-// second task (appending the saved notes to a section in which the notes will appear)
-const save_btn = document.getElementById("save-btn"); // grabbing the save btn
-
-// grabbing the title to then save and act as the unordered lists title:
-const ul_title = document.getElementById("note-title")
-const notes_list = document.getElementById("notes-list"); // grab the notes-list unordered list element, to which then we will append each note from the storage array as an <li> element in the unordered list
-
-
-document.getElementById("Clear-btn").addEventListener("click", () => {
+// CLEAR BUTTON
+clear_btn.addEventListener("click", () => {
     ul_title.value = "";
     content.value = "";
-    console.log("note cleared") // test
+    current = null;
+    console.log("note cleared");
 });
 
-
-let storage = []; // storing our notes here (different from the arr array which is used for logging every key stroke made by the user)
-
-let same; // small logic ill add to make sure the same title doesn't exist when the user makes a new note
-
-let title;
-let content2;
-
-
+// SAVE BUTTON
 save_btn.addEventListener("click", () => {
-    if (ul_title.value !== same) {
-        if (content.value !== "") { // only save if the content text isn't empty
-            storage.push(content.value)
-            console.log(storage) // testing purposes
-            same = ul_title.value;
-            // inner spam elements to hold the <li> elements title (note title)
-            const inner_sp = document.createElement("span")
-            inner_sp.innerText = ul_title.value;
+    if (ul_title.value === "" || content.value === "") {
+        alert("content/title cant be empty.");
+        return;
+    }
 
-            title = ul_title.value;
-            content2 = content.value;
+    if (ul_title.value === same) {
+        alert("Note with same title already exists.");
+        return;
+    }
 
-            const li = document.createElement("li"); // create the element to append to the unordered list (this is to test my solution)
-            li.classList.add("note-item") // setting the className to this as the css will pick it up and apply the styles needed
-            const unique_id = "abc-" + Date.now();
-            inner_sp.id = unique_id
-            li.id = unique_id
-            li.appendChild(inner_sp)
-            notes_list.appendChild(li)
-            console.log("code reached") // test case
+    const unique_id = "note-" + Date.now();
 
-            // for referencing the current note
-            let current = null;
+    const note = {
+        id: unique_id,
+        title: ul_title.value,
+        content: content.value,
+        locked: false,
+        password: null
+    };
 
-            const note_title = ul_title.value;
-            const note_content = content.value;
+    storage.push(note);
+    same = note.title;
 
-            li.addEventListener("click", () => {
-                console.log("new code reached") // test case
-                ul_title.value = note_title;
-                content.value = note_content;
+    // create UI element
+    const li = document.createElement("li");
+    li.classList.add("note-item");
+    li.id = unique_id;
 
-                current = li;
-            });
+    const span = document.createElement("span");
+    span.innerText = note.title;
 
+    li.appendChild(span);
+    notes_list.appendChild(li);
 
-            const delete_btn = document.getElementById("delete-btn")
-            // delete btn logic
-            delete_btn.addEventListener("click", () => {
-                console.log("delete code reached") // testing again
-                if (current) {
-                    current.remove()
-                    current = null; // make it back to null after removing from note_list
-                    ul_title.value = "";
-                    content.value = "";
-                }
-            });
+    // CLICK NOTE
+    li.addEventListener("click", () => {
+        if (note.locked) {
+            const input = prompt("Enter password to unlock:");
 
-
+            if (input === note.password) {
+                ul_title.value = note.title;
+                content.value = note.content;
+                current = note;
+            } else {
+                alert("Wrong password!");
+            }
+        } else {
+            ul_title.value = note.title;
+            content.value = note.content;
+            current = note;
         }
-    }
+    });
 
-    // checking if values are nil
-    if (content.value == "" || ul_title.value == "") {
-        globalThis.alert("content/title cant be empty.")
-    }
+    console.log("Saved:", storage);
 });
 
-// too ez
+// DELETE BUTTON
+delete_btn.addEventListener("click", () => {
+    if (!current) {
+        alert("No note selected.");
+        return;
+    }
+
+    // remove from DOM
+    const el = document.getElementById(current.id);
+    if (el) el.remove();
+
+    // remove from storage
+    storage = storage.filter(n => n.id !== current.id);
+
+    // reset
+    current = null;
+    ul_title.value = "";
+    content.value = "";
+
+    console.log("Deleted. Remaining:", storage);
+});
+
+// LOCK BUTTON
+lock_btn.addEventListener("click", () => {
+    if (!current) {
+        alert("No note selected.");
+        return;
+    }
+
+    if (current.locked) {
+        alert("Note is already locked.");
+        return;
+    }
+
+    const pass = prompt("Set a password:");
+
+    if (!pass) {
+        alert("Password cannot be empty.");
+        return;
+    }
+
+    current.locked = true;
+    current.password = pass;
+
+    alert("Note locked successfully.");
+});
